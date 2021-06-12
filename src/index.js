@@ -3,12 +3,17 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import {Typography} from "@material-ui/core";
+import {Provider} from "react-redux";
+import store from './redux/store'
 
 ReactDOM.render(
-  <React.StrictMode>
-      <Typography>
-        <App />
-      </Typography>
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+        <Provider store={store}>
+            <Typography>
+                <App/>
+            </Typography>
+        </Provider>
+    </React.StrictMode>,
+    document.getElementById('root')
 );
+ 
