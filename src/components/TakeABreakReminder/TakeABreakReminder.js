@@ -1,17 +1,20 @@
-import TimerWithSound from "../TimerWithSound/TimerWithSound";
-import CenterAlignedCard from "../CenterAlignedCard/CenterAlignedCard";
+import CardWithTitleContentAndSlider from "../CardWithTitleContentAndSlider/CardWithTitleContentAndSlider";
+import {useSelector} from "react-redux";
+import {setBreakMinutes} from "../../redux/reducers/timers";
 
 
 function TakeABreakReminder() {
-    const content = (<TimerWithSound minutes={50} soundFile={'juntos.mp3'}/>)
+    const minutesSelector = useSelector((state) => state.timer.breakMinutes);
 
     return (
-        <CenterAlignedCard
-            title="Take a well-deserved break"
-            content={content}
-            min={1}
+        <CardWithTitleContentAndSlider
+            title={"Take a well-deserved break!"}
+            sound={"juntos.mp3"}
+            min={30}
             max={60}
-            defaultValue={5}
+            step={5}
+            defaultValue={minutesSelector}
+            onChangeCommitted={setBreakMinutes}
         />
     );
 }

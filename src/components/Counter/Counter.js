@@ -1,6 +1,5 @@
 import {Button, makeStyles, Typography} from "@material-ui/core";
-import counter, {decrement, increment} from "../../redux/reducers/drink";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 
 const useStyles = makeStyles({
     row: {
