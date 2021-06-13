@@ -17,44 +17,67 @@ function CircularProgressWithLabel(props) {
 }
 
 function TimerWithSound(props) {
-    const [minutes, setMinutes] = useState(props.minutes);
-    const [seconds, setSeconds] = useState(0);
-    const [totalTime] = useState(minutes * 60);
-
-    function getPaded(number) {
-        if (number < 10) return '0' + number;
-        return number;
-    }
+    const [minutesInTotal, setMinutesInTotal] = useState(props.minutes);
+    const [minutesLeft, setMinutesLeft] = useState(props.minutes);
+    const [secondsLeft, setSecondsLeft] = useState(0);
+    const [updateTime, setUpdateTime] = useState(new Date());
 
     useEffect(() => {
         function play() {
-            new Audio(props.soundFile).play().then(_ => {});
+            new Audio(props.soundFile).play().then(_ => {
+            });
         }
 
+
         let intervalId = setInterval(() => {
-            setSeconds(seconds - 1);
-            if (seconds === 0) {
-                if (minutes === 0) {
-                    play();
-                    setMinutes(props.minutes);
-                    setSeconds(0)
-                    return;
-                }
-                setMinutes(minutes - 1);
-                setSeconds(59);
+            const currentTime = new Date();
+
+            const deltaTime = currentTime - updateTime;
+
+            if(minutesInTotal !== props.minutes){
+                setUpdateTime(new Date());
+                setMinutesInTotal(props.minutes);
+                setMinutesLeft(props.minutes);
+                setSecondsLeft(0);
+                return;
             }
+
+            if(minutesLeft === 0 && secondsLeft === 0){
+                setUpdateTime(new Date())
+                setMinutesLeft(minutesInTotal);
+                setSecondsLeft(0);
+                play();
+                return;
+            }
+
+            setMinutesLeft(Math.floor(minutesInTotal - (deltaTime % (1000 * 60 * 60)) / (1000 * 60)));
+            setSecondsLeft(Math.floor(61 - (deltaTime % (1000 * 60)) / 1000));
         }, 1000);
         return () => {
             clearInterval(intervalId);
         }
-    }, [minutes, seconds, props.minutes, props.soundFile])
+    }, [minutesInTotal, minutesLeft, props.minutes, props.soundFile, secondsLeft, updateTime]);
 
-    function getFormattedTime() {
-        return minutes + ':' + getPaded(seconds);
+
+    function getPercentOfTimePassed() {
+        const totalTime = minutesInTotal * 60;
+        return (totalTime - ((minutesLeft) * 60 + secondsLeft)) / (totalTime / 100)
     }
 
-    return (<CircularProgressWithLabel value={(totalTime - (minutes  * 60 + seconds)) / (totalTime / 100)}
-                                       label={getFormattedTime()}/>);
+    function getPaded(value) {
+        if (value < 10) return '0' + value;
+        return value;
+    }
+
+    function getFormattedLabel() {
+        return minutesLeft + ':' + getPaded(secondsLeft);
+    }
+
+    return (
+        <div>
+            <CircularProgressWithLabel value={getPercentOfTimePassed()} label={getFormattedLabel()}/>
+        </div>
+    )
 }
 
 export default TimerWithSound;
