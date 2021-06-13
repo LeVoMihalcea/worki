@@ -24,8 +24,7 @@ function TimerWithSound(props) {
 
     useEffect(() => {
         function play() {
-            new Audio(props.soundFile).play().then(_ => {
-            });
+            new Audio(props.soundFile).play();
         }
 
 
@@ -42,16 +41,15 @@ function TimerWithSound(props) {
                 return;
             }
 
-            if(minutesLeft === 0 && secondsLeft === 0){
+            setMinutesLeft(Math.floor(minutesInTotal - (deltaTime % (1000 * 60 * 60)) / (1000 * 60)));
+            setSecondsLeft(Math.floor(61 - (deltaTime % (1000 * 60)) / 1000));
+
+            if(minutesLeft === 0 && secondsLeft === 1){
                 setUpdateTime(new Date())
                 setMinutesLeft(minutesInTotal);
                 setSecondsLeft(0);
                 play();
-                return;
             }
-
-            setMinutesLeft(Math.floor(minutesInTotal - (deltaTime % (1000 * 60 * 60)) / (1000 * 60)));
-            setSecondsLeft(Math.floor(61 - (deltaTime % (1000 * 60)) / 1000));
         }, 1000);
         return () => {
             clearInterval(intervalId);
@@ -61,7 +59,7 @@ function TimerWithSound(props) {
 
     function getPercentOfTimePassed() {
         const totalTime = minutesInTotal * 60;
-        return (totalTime - ((minutesLeft) * 60 + secondsLeft)) / (totalTime / 100)
+        return (((minutesLeft) * 60 + secondsLeft)) / (totalTime / 100)
     }
 
     function getPaded(value) {
