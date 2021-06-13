@@ -4,7 +4,7 @@ export const timerSlice = createSlice({
     name: 'timerSlice',
     initialState: {
         backStraightenMinutes: 5,
-        breakMinutes: 50
+        breakMinutes: 50,
     },
     reducers: {
         setBackStraightenMinutes: (state, action) => {

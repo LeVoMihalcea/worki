@@ -1,7 +1,7 @@
 import CenterAlignedCard from "../CenterAlignedCard/CenterAlignedCard";
 import Counter from "../Counter/Counter";
 import {useSelector} from "react-redux";
-import {decrementCoffee, decrementWater, incrementCoffee, incrementWater} from "../../redux/reducers/drink";
+import {decrementWater, incrementWater} from "../../redux/reducers/drink";
 
 function WaterCupTracker() {
     const counter = useSelector((state) => {
