@@ -50,6 +50,9 @@ function TimerWithSound(props) {
                 setSecondsLeft(0);
                 play();
             }
+
+            setMinutesLeft(Math.floor(minutesInTotal - (deltaTime % (1000 * 60 * 60)) / (1000 * 60)));
+            setSecondsLeft(Math.floor(61 - (deltaTime % (1000 * 60)) / 1000));
         }, 1000);
         return () => {
             clearInterval(intervalId);
