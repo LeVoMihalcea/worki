@@ -1,8 +1,7 @@
 import TimerWithSound from "../TimerWithSound/TimerWithSound";
 import CenterAlignedCard from "../CenterAlignedCard/CenterAlignedCard";
 import {Collapse, IconButton, makeStyles, Slider, Typography} from "@material-ui/core";
-import {useDispatch, useSelector} from "react-redux";
-import {setBackStraightenMinutes} from "../../redux/reducers/timers";
+import {useDispatch} from "react-redux";
 import {useState} from "react";
 import clsx from "clsx";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -23,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function CardWithTitleContentAndSlider({title, sound, min, max, step, defaultValue, onChangeCommitted}) {
+function CardWithTitleContentAndSlider({id, title, sound, min, max, step, defaultValue, onChangeCommitted}) {
     const classes = useStyles();
     const [expanded, setExpanded] = useState(false);
     const dispatch = useDispatch();
@@ -34,18 +33,6 @@ function CardWithTitleContentAndSlider({title, sound, min, max, step, defaultVal
 
     function getCollapsableSlider() {
         return <>
-            <Collapse in={expanded} timeout="auto" unmountOnExit>
-                <Typography className={classes.leftAligned}>
-                    You can change the minutes here
-                </Typography>
-                <Slider
-                    defaultValue={defaultValue} aria-labelledby="discrete-slider-always"
-                    valueLabelDisplay="auto" step={step} marks min={min} max={max}
-                    onChangeCommitted={(event, value) => {
-                        dispatch(onChangeCommitted(value));
-                    }}
-                />
-            </Collapse>
             <IconButton
                 className={clsx(classes.expand, {
                     [classes.expandOpen]: expanded,
@@ -56,6 +43,18 @@ function CardWithTitleContentAndSlider({title, sound, min, max, step, defaultVal
             >
                 <ExpandMoreIcon/>
             </IconButton>
+            <Collapse in={expanded} timeout="auto" unmountOnExit>
+                <Typography className={classes.leftAligned}>
+                    You can change the minutes here
+                </Typography>
+                <Slider
+                    defaultValue={defaultValue} aria-labelledby="discrete-slider-always"
+                    valueLabelDisplay="auto" step={step} marks min={min} max={max}
+                    onChangeCommitted={(event, value) => {
+                        dispatch(onChangeCommitted({id, value}));
+                    }}
+                />
+            </Collapse>
         </>;
     }
 

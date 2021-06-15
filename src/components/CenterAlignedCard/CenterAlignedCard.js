@@ -1,26 +1,33 @@
-import {Card, CardContent, makeStyles, Typography} from "@material-ui/core";
+import {Card, CardContent, makeStyles, Typography, useTheme} from "@material-ui/core";
 
-const useStyles = makeStyles({
-    title: {
-        fontSize: 20,
-    },
-    icon: {
-        width: "20%",
-    },
-    card: {
-        textAlign: "center"
-    },
-    invisible: {
-        visibility: "hidden"
+const useStyles = makeStyles(() => {
+        return {
+            card: {
+
+            },
+            title: {
+                fontSize: 20,
+            },
+            icon: {
+                width: "20%",
+            },
+            cardContent: {
+                textAlign: "center"
+            },
+            invisible: {
+                visibility: "hidden"
+            }
+        }
     }
-});
+    )
+;
 
 function CenterAlignedCard({title, icon, content}) {
     const classes = useStyles();
 
     return (
-        <Card>
-            <CardContent className={classes.card}>
+        <Card className={classes.card}>
+            <CardContent className={classes.cardContent}>
                 <Typography className={classes.title} color="textPrimary" gutterBottom>
                     {title}
                 </Typography>

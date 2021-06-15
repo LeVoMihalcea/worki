@@ -11,25 +11,27 @@ const useStyles = makeStyles({
 
     },
     textButton: {
-        margin: "50px",
+        fontSize: 32,
+        margin: 50,
     }
 });
-function Counter({count, increment, decrement, nonnegative = false, initial = 0}) {
+
+function Counter({id, count, increment, decrement, nonnegative = false, initial = 0}) {
     const dispatch = useDispatch();
     const classes = useStyles();
 
     return (
         <div className={classes.row}>
-            <Button variant="contained"
-                    className={classes.textButton}
-                    onClick={() => {dispatch(decrement())}}
+            <Button
+                className={classes.textButton}
+                onClick={() => {dispatch(decrement)}}
             >-</Button>
+
             <Typography variant="h3">{count}</Typography>
-            <Button variant="contained" className={classes.textButton}
-                    onClick={() => dispatch(increment())}
-            >
-                    +
-            </Button>
+
+            <Button className={classes.textButton}
+                    onClick={() => dispatch(increment)}
+            >+</Button>
         </div>
     );
 }
