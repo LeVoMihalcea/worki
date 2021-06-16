@@ -22,12 +22,12 @@ function DashboardGrid() {
         >
 
             {Object.keys(items).map((key) => (
-                <Grid item key={items[key].id} s={12} sm={6} md={4} lg={3}>
+                <Grid item key={items[key].id} xs={12} sm={6} md={4} lg={3} xl={2}>
                     {getItemByType(key, items[key].type)}
                 </Grid>
             ))}
 
-            <Grid item xs={12} sm={6} md={4} lg={3}>
+            <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
                 <CreateComponent/>
             </Grid>
         </Grid>

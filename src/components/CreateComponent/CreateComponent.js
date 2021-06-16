@@ -1,4 +1,4 @@
-import {Card, Dialog, DialogTitle, List, makeStyles, Typography} from "@material-ui/core";
+import {Card, makeStyles, Typography} from "@material-ui/core";
 import {useDispatch} from "react-redux";
 import {openDialog} from "../../redux/reducers/dashboardItems";
 import CreateItemDialog from "../CreateItemDialog/CreateItemDialog";

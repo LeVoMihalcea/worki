@@ -3,13 +3,13 @@ import { createSlice } from '@reduxjs/toolkit'
 export const dashboardItemsSlice = createSlice({
     name: 'items',
     initialState: {
-        items: {
-            4: {type: "counter", icon: "coffee.svg", title: "Cups of coffee", counter: 0},
-            3: {type: "counter", icon: "drink-water.svg", title: "Cups of Water", counter: 0},
-            0: {type: "timer", title: "Straighten your Back Reminder", sound: "juntos.mp3", min: 1, max: 30, step: 5, minutes: 5},
-            2: {type: "counter", icon: "coffee.svg", title: "Cups of coffee", counter: 0},
-            1: {type: "timer", title: "Take a well-deserved break!", sound: "juntos.mp3", min: 30, max: 60, step: 10, minutes: 50},
-        },
+        items: [
+            {id: 0, type: "timer", title: "Straighten your Back Reminder", sound: "juntos.mp3", min: 1, max: 30, step: 5, minutes: 5},
+            {id: 1, type: "timer", title: "Take a well-deserved break!", sound: "juntos.mp3", min: 30, max: 60, step: 10, minutes: 50},
+            {id: 2, type: "counter", icon: "coffee.svg", title: "Cups of coffee", counter: 0, nonnegative: true},
+            {id: 3, type: "counter", icon: "drink-water.svg", title: "Cups of Water", counter: 0, nonnegative: true},
+            {id: 4, type: "counter", icon: "coffee.svg", title: "Cups of coffee", counter: 0, nonnegative: true},
+        ],
         dialogOpen: false,
     },
     reducers: {
@@ -17,7 +17,8 @@ export const dashboardItemsSlice = createSlice({
             state.items.push(payload)
         },
         deleteItem: (state, payload) => {
-            //todo
+            console.log(payload);
+            delete state.items[payload.payload];
         },
         incrementCounter: (state, payload) => {
             console.log(payload);
