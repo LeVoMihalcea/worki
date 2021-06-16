@@ -1,12 +1,4 @@
-import {
-    Button,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    DialogTitle,
-    FormControl, FormHelperText, Input, InputLabel
-} from "@material-ui/core";
+import {Dialog, DialogContent, DialogContentText, DialogTitle} from "@material-ui/core";
 import {useDispatch, useSelector} from "react-redux";
 import {closeDialog} from "../../redux/reducers/dashboardItems";
 import CreateComponenteForm from "./CreateComponentForm";
@@ -32,8 +24,7 @@ function SimpleDialog() {
             <DialogTitle>Create a new Dashboard item</DialogTitle>
             <DialogContent>
                 <DialogContentText>
-                    Let Google help apps determine location. This means sending anonymous location data to
-                    Google, even when no apps are running.
+                    Let Google help apps determine location.
                 </DialogContentText>
                 <CreateComponenteForm/>
             </DialogContent>

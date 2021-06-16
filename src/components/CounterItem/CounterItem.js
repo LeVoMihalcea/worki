@@ -9,10 +9,11 @@ function CounterItem({id}) {
     console.log(counterItem);
 
     const content = (<Counter count={counterItem.counter} increment={incrementCounter(id)}
-                              decrement={decrementCounter(id)} nonnegative={true}/>)
+                              decrement={decrementCounter(id)} nonnegative={counterItem.nonnegative}/>)
 
     return (
         <CenterAlignedCard
+            id={id}
             title={counterItem.title}
             icon={counterItem.icon}
             content={content}

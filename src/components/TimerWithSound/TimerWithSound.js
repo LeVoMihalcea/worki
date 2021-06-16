@@ -44,7 +44,7 @@ function TimerWithSound(props) {
             setMinutesLeft(Math.floor(minutesInTotal - (deltaTime % (1000 * 60 * 60)) / (1000 * 60)));
             setSecondsLeft(Math.floor(61 - (deltaTime % (1000 * 60)) / 1000));
 
-            if(minutesLeft === 0 && secondsLeft === 1){
+            if((minutesLeft === 0 && secondsLeft === 1) || minutesLeft === -1){
                 setUpdateTime(new Date())
                 setMinutesLeft(minutesInTotal);
                 setSecondsLeft(0);

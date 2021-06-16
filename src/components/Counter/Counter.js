@@ -20,11 +20,15 @@ function Counter({id, count, increment, decrement, nonnegative = false, initial 
     const dispatch = useDispatch();
     const classes = useStyles();
 
+    function handleDecrement() {
+        if((nonnegative && count > 0) || !nonnegative) dispatch(decrement)
+    }
+
     return (
         <div className={classes.row}>
             <Button
                 className={classes.textButton}
-                onClick={() => {dispatch(decrement)}}
+                onClick={handleDecrement}
             >-</Button>
 
             <Typography variant="h3">{count}</Typography>

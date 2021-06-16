@@ -69,7 +69,7 @@ function CardWithTitleContentAndSlider({id, title, sound, min, max, step, defaul
 
     return (
         <div>
-            <CenterAlignedCard title={title} content={getContent()}/>
+            <CenterAlignedCard id={id} title={title} content={getContent()}/>
         </div>
     );
 }
